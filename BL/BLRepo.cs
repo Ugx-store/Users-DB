@@ -51,5 +51,41 @@ namespace BL
         {
             await _repo.DeleteFollowerAsync(id);
         }
+
+        //--------------- Reviews CRUD ---------------
+        public async Task<UserReviews> AddReviewAsync(UserReviews review)
+        {
+            return await _repo.AddReviewAsync(review);
+        }
+        public async Task<UserReviews> GetOneReviewAsync(int id)
+        {
+            return await _repo.GetOneReviewAsync(id);
+        }
+        public async Task DeleteReviewAsync(int id)
+        {
+            await _repo.DeleteReviewAsync(id);
+        }
+        public async Task<UserReviews> UpdateReviewAsync(UserReviews review)
+        {
+            return await _repo.UpdateReviewAsync(review);
+        }
+
+        //--------------- Profile Picture CRUD ---------------
+        public async Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic)
+        {
+            return await _repo.AddProfilePicAsync(pic);
+        }
+        public async Task<ProfilePicture> GetProfilePicAsync(int id)
+        {
+            return await _repo.GetProfilePicAsync(id);
+        }
+        public async Task DeleteProfilePicAsync(int id)
+        {
+            await _repo.DeleteProfilePicAsync(id);
+        }
+        public async Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic)
+        {
+            return await _repo.UpdateProfilePicAsync(pic);
+        }
     }
 }

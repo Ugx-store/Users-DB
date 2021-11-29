@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models
@@ -16,5 +12,6 @@ namespace Models
         public string Bio { set; get; }
         public long PhoneNumber { set; get; }
         public List<Followings> Followings { set; get; }
+        public List<UserReviews> Reviews { set; get; }
     }
 }

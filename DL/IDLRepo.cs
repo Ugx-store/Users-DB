@@ -21,5 +21,16 @@ namespace DL
         Task DeleteFollowerAsync(int id);
         Task<Followings> GetOneFollowerAsync(int id);
 
+        //User Reviews CRUD
+        Task<UserReviews> AddReviewAsync(UserReviews review);
+        Task<UserReviews> GetOneReviewAsync(int id);
+        Task DeleteReviewAsync(int id);
+        Task<UserReviews> UpdateReviewAsync(UserReviews review);
+
+        //ProfilePicture CRUD
+        Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic);
+        Task<ProfilePicture> GetProfilePicAsync(int id);
+        Task DeleteProfilePicAsync(int id);
+        Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic);
     }
 }

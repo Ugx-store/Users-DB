@@ -10,5 +10,6 @@ namespace DL
         public DbSet<User> Users { get; set; }
         public DbSet<Followings> Followings { get; set; }
         public DbSet<UserReviews> UserReviews { get; set; }
+        public DbSet<ProfilePicture> ProfilePictures { get; set; }
     }
 }

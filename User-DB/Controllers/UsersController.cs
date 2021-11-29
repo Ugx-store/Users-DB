@@ -51,7 +51,7 @@ namespace User_DB.Controllers
             }
         }
 
-        // POST api/<UsersController>
+        // POST api/<UsersController>; To create a new user in the DB
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] User newUser)
         {
@@ -59,7 +59,7 @@ namespace User_DB.Controllers
             return Created("api/[controller]", user);
         }
 
-        // PUT api/<UsersController>/5
+        // PUT api/<UsersController>/5; To update a user in the DB
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] User updatedUser)
         {
@@ -67,7 +67,7 @@ namespace User_DB.Controllers
             return Ok(user);
         }
 
-        // DELETE api/<UsersController>/5
+        // DELETE api/<UsersController>/5; To delete a user from the DB
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {

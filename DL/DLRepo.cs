@@ -46,6 +46,15 @@ namespace DL
                         FollowerUserId = f.FollowerUserId,
                         FollowedUserId = f.FollowedUserId,
                         FollowerName = f.FollowerName
+                    }).ToList(),
+                    Reviews = _context.UserReviews.Where(r => r.RatedUserId == u.Id).Select(r => new UserReviews()
+                    {
+                        Id = r.Id,
+                        Rating = r.Rating,
+                        RatedUserId = r.RatedUserId,
+                        RaterUserId = r.RaterUserId,
+                        RaterName = r.RaterName,
+                        Note = r.Note
                     }).ToList()
                 })
                 .FirstOrDefaultAsync(u => u.Id == id);
@@ -70,6 +79,15 @@ namespace DL
                         FollowerUserId = f.FollowerUserId,
                         FollowedUserId = f.FollowedUserId,
                         FollowerName = f.FollowerName
+                    }).ToList(),
+                    Reviews = _context.UserReviews.Where(r => r.RatedUserId == u.Id).Select(r => new UserReviews()
+                    {
+                        Id = r.Id,
+                        Rating = r.Rating,
+                        RatedUserId = r.RatedUserId,
+                        RaterUserId = r.RaterUserId,
+                        RaterName = r.RaterName,
+                        Note = r.Note
                     }).ToList()
                 }).ToListAsync();
         }
@@ -96,7 +114,7 @@ namespace DL
                 Username = user.Username,
                 Email = user.Email,
                 Bio = user.Bio,
-                PhoneNumber = user.PhoneNumber,
+                PhoneNumber = user.PhoneNumber
             };
         }
 
@@ -131,6 +149,94 @@ namespace DL
             _context.Followings.Remove(await GetOneFollowerAsync(id));
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
+        }
+
+        //Add a review
+        public async Task<UserReviews> AddReviewAsync(UserReviews review)
+        {
+            await _context.AddAsync(review);
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+
+            return review;
+        }
+        public async Task<UserReviews> GetOneReviewAsync(int id)
+        {
+            return await _context.UserReviews
+                .AsNoTracking()
+                .Select(r => new UserReviews()
+                {
+                    Id = r.Id,
+                    Rating = r.Rating,
+                    Note = r.Note,
+                    RatedUserId = r.RatedUserId,
+                    RaterUserId = r.RaterUserId,
+                    RaterName = r.RaterName
+                })
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
+        public async Task DeleteReviewAsync(int id)
+        {
+            _context.UserReviews.Remove(await GetOneReviewAsync(id));
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+        }
+        public async Task<UserReviews> UpdateReviewAsync(UserReviews review)
+        {
+            _context.UserReviews.Update(review);
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+
+            return new UserReviews()
+            {
+                Id = review.Id,
+                Rating = review.Rating,
+                Note = review.Note,
+                RatedUserId = review.RatedUserId,
+                RaterUserId = review.RaterUserId,
+                RaterName = review.RaterName
+            };
+        }
+
+        //ProfilePicture CRUD
+        public async Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic)
+        {
+            await _context.AddAsync(pic);
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+
+            return pic;
+        }
+        public async Task<ProfilePicture> GetProfilePicAsync(int id)
+        {
+            return await _context.ProfilePictures
+                .AsNoTracking()
+                .Select(p => new ProfilePicture()
+                {
+                    Id = p.Id,
+                    UserId = p.UserId,
+                    ImageData = p.ImageData
+                })
+                .FirstOrDefaultAsync(p => p.UserId == id);
+        }
+        public async Task DeleteProfilePicAsync(int id)
+        {
+            _context.ProfilePictures.Remove(await GetProfilePicAsync(id));
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+        }
+        public async Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic)
+        {
+            _context.ProfilePictures.Update(pic);
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+
+            return new ProfilePicture()
+            {
+                Id = pic.Id,
+                UserId = pic.UserId,
+                ImageData = pic.ImageData
+            };
         }
     }
 }
