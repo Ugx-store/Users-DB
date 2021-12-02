@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models
@@ -11,6 +12,10 @@ namespace Models
         public string Email { set; get; }
         public string Bio { set; get; }
         public long PhoneNumber { set; get; }
+        public string FacebookLink { get; set; }
+        public string TwitterLink { get; set; }
+        public string InstagramLink { get; set; }
+        public DateTime DateTimeJoined { set; get; }
         public List<Followings> Followings { set; get; }
         public List<UserReviews> Reviews { set; get; }
     }

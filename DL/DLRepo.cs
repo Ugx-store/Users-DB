@@ -32,6 +32,7 @@ namespace DL
             return await _context.Users
                 .AsNoTracking()
                 .Include(f => f.Followings)
+                .Include(r => r.Reviews)
                 .Select(u => new User()
                 {
                     Id = u.Id,
@@ -65,6 +66,7 @@ namespace DL
         {
             return await _context.Users
                 .Include(f => f.Followings)
+                .Include(r => r.Reviews)
                 .Select(u => new User()
                 {
                     Id = u.Id,
