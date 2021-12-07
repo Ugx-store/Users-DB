@@ -41,6 +41,11 @@ namespace DL
                     Email = u.Email,
                     Bio = u.Bio,
                     PhoneNumber = u.PhoneNumber,
+                    ReceiveEmailConsent = u.ReceiveEmailConsent,
+                    FacebookLink = u.FacebookLink,
+                    TwitterLink = u.TwitterLink,
+                    InstagramLink = u.InstagramLink,
+                    DateTimeJoined = u.DateTimeJoined,
                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                     {
                         Id = f.Id,
@@ -75,6 +80,11 @@ namespace DL
                     Email = u.Email,
                     Bio = u.Bio,
                     PhoneNumber = u.PhoneNumber,
+                    ReceiveEmailConsent = u.ReceiveEmailConsent,
+                    FacebookLink = u.FacebookLink,
+                    TwitterLink = u.TwitterLink,
+                    InstagramLink = u.InstagramLink,
+                    DateTimeJoined = u.DateTimeJoined,
                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                     {
                         Id = f.Id,
