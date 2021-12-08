@@ -51,6 +51,21 @@ namespace User_DB.Controllers
             }
         }
 
+        // GET api/<UsersController>/peter; To return either 1 or 0
+        [HttpGet("user/{username}")]
+        public async Task<IActionResult> Get(string username)
+        {
+            int num = await _bl.CheckUserNameAsync(username);
+            if (num == 1)
+            {
+                return Ok(1);
+            }
+            else
+            {
+                return Ok(0);
+            }
+        }
+
         // POST api/<UsersController>; To create a new user in the DB
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] User newUser)

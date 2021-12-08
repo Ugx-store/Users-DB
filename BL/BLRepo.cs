@@ -27,6 +27,11 @@ namespace BL
         {
             return await _repo.GetAllUsersAsync();
         }
+
+        public async Task<int> CheckUserNameAsync(string username)
+        {
+            return await _repo.CheckUserNameAsync(username);
+        }
         public async Task DeleteUserAsync(int id)
         {
             await _repo.DeleteUserAsync(id);

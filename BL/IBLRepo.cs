@@ -13,6 +13,7 @@ namespace BL
         Task<User> AddUserAsync(User user);
         Task<User> GetOneUserAsync(int id);
         Task<List<User>> GetAllUsersAsync();
+        Task<int> CheckUserNameAsync(string username);
         Task DeleteUserAsync(int id);
         Task<User> UpdateUserAsync(User user);
 

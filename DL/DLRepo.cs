@@ -66,6 +66,26 @@ namespace DL
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
+        public async Task<int> CheckUserNameAsync(string username)
+        {
+            User user = await _context.Users
+                .AsNoTracking()
+                .Select(u => new User()
+                {
+                    Username = u.Username,
+                })
+                .FirstOrDefaultAsync(u => u.Username == username);
+
+            if (user != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //Retrieve all users from the DB
         public async Task<List<User>> GetAllUsersAsync()
         {

@@ -15,6 +15,7 @@ namespace DL
         Task<List<User>> GetAllUsersAsync();
         Task DeleteUserAsync(int id);
         Task<User> UpdateUserAsync(User user);
+        Task<int> CheckUserNameAsync(string username);
 
         //Followings CRUD
         Task<Followings> AddFollowerAsync(Followings follower);
