@@ -15,6 +15,7 @@ namespace BL
         Task<List<User>> GetAllUsersAsync();
         Task<int> CheckUserNameAsync(string username);
         Task<int> CheckEmailAsync(string email);
+        Task<int> CheckPhoneNumberAsync(string phoneNumber);
         Task DeleteUserAsync(int id);
         Task<User> UpdateUserAsync(User user);
 

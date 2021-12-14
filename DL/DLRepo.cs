@@ -106,6 +106,26 @@ namespace DL
             }
         }
 
+        public async Task<int> CheckPhoneNumberAsync(string phoneNumber)
+        {
+            User user = await _context.Users
+                .AsNoTracking()
+                .Select(u => new User()
+                {
+                    PhoneNumber = u.PhoneNumber
+                })
+                .FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber);
+
+            if (user != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //Retrieve all users from the DB
         public async Task<List<User>> GetAllUsersAsync()
         {

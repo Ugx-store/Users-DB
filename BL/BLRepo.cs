@@ -37,6 +37,13 @@ namespace BL
         {
             return await _repo.CheckEmailAsync(email);
         }
+
+        public async Task<int> CheckPhoneNumberAsync(string phoneNumber)
+        {
+            return await _repo.CheckPhoneNumberAsync(phoneNumber);
+        }
+
+
         public async Task DeleteUserAsync(int id)
         {
             await _repo.DeleteUserAsync(id);

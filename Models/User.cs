@@ -11,7 +11,7 @@ namespace Models
         public string Username { set; get; }
         public string Email { set; get; }
         public string Bio { set; get; }
-        public long PhoneNumber { set; get; }
+        public string PhoneNumber { set; get; }
         public bool ReceiveEmailConsent { set; get; }
         public string FacebookLink { get; set; }
         public string TwitterLink { get; set; }

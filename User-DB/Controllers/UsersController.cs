@@ -51,7 +51,7 @@ namespace User_DB.Controllers
             }
         }
 
-        // GET api/<UsersController>/peter; To return either 1 or 0
+        // GET api/<UsersController>/user/peter; To return either 1 or 0
         [HttpGet("user/{username}")]
         public async Task<IActionResult> Get(string username)
         {
@@ -66,11 +66,26 @@ namespace User_DB.Controllers
             }
         }
 
-        // GET api/<UsersController>/peter@test.com; To return either 1 or 0
+        // GET api/<UsersController>/email/peter@test.com; To return either 1 or 0
         [HttpGet("email/{email}")]
         public async Task<IActionResult> GetEmail(string email)
         {
             int num = await _bl.CheckEmailAsync(email);
+            if (num == 1)
+            {
+                return Ok(1);
+            }
+            else
+            {
+                return Ok(0);
+            }
+        }
+
+        // GET api/<UsersController>/phone/123456789; To return either 1 or 0
+        [HttpGet("phone/{phoneNumber}")]
+        public async Task<IActionResult> GetPhone(string phoneNumber)
+        {
+            int num = await _bl.CheckPhoneNumberAsync(phoneNumber);
             if (num == 1)
             {
                 return Ok(1);
