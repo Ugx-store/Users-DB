@@ -82,7 +82,7 @@ namespace User_DB.Controllers
         }
 
         // GET api/<UsersController>/phone/123456789; To return either 1 or 0
-        [HttpGet("phone/{phoneNumber}")]
+        [HttpGet("phone/{*phoneNumber}")]
         public async Task<IActionResult> GetPhone(string phoneNumber)
         {
             int num = await _bl.CheckPhoneNumberAsync(phoneNumber);
