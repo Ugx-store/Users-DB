@@ -86,6 +86,26 @@ namespace DL
             }
         }
 
+        public async Task<int> CheckEmailAsync(string email)
+        {
+            User user = await _context.Users
+                .AsNoTracking()
+                .Select(u => new User()
+                {
+                    Email = u.Email,
+                })
+                .FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //Retrieve all users from the DB
         public async Task<List<User>> GetAllUsersAsync()
         {
