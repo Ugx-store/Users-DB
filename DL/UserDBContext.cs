@@ -11,5 +11,6 @@ namespace DL
         public DbSet<Followings> Followings { get; set; }
         public DbSet<UserReviews> UserReviews { get; set; }
         public DbSet<ProfilePicture> ProfilePictures { get; set; }
+        public DbSet<PromoCode> PromoCodes { get; set; }
     }
 }

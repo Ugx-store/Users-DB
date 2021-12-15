@@ -19,6 +19,10 @@ namespace BL
         Task DeleteUserAsync(int id);
         Task<User> UpdateUserAsync(User user);
 
+        //Promocodes CRUD
+        Task<PromoCode> AddPromoCodeAsync(PromoCode code);
+        Task<int> CheckPromoCodeAsync(string code);
+
         //Following CRUD
         Task<Followings> AddFollowerAsync(Followings follower);
         Task DeleteFollowerAsync(int id);

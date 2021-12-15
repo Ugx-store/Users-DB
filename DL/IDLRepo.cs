@@ -19,6 +19,10 @@ namespace DL
         Task<int> CheckEmailAsync(string email);
         Task<int> CheckPhoneNumberAsync(string phoneNumber);
 
+        //Promocodes CRUD
+        Task<PromoCode> AddPromoCodeAsync(PromoCode code);
+        Task<int> CheckPromoCodeAsync(string code);
+
         //Followings CRUD
         Task<Followings> AddFollowerAsync(Followings follower);
         Task DeleteFollowerAsync(int id);

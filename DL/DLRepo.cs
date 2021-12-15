@@ -196,6 +196,38 @@ namespace DL
             };
         }
 
+        //Add PromoCode
+        public async Task<PromoCode> AddPromoCodeAsync(PromoCode code)
+        {
+            await _context.AddAsync(code);
+            _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
+
+            return code;
+        }
+
+        //Check for a promo code
+        public async Task<int> CheckPromoCodeAsync(string codeToCheck)
+        {
+            PromoCode code = await _context.PromoCodes
+                                .AsNoTracking()
+                                .Select(p => new PromoCode()
+                                {
+                                    Id = p.Id,
+                                    Code = p.Code,
+                                    Owner = p.Owner
+                                })
+                                .FirstOrDefaultAsync(p => p.Code == codeToCheck);
+            if(code != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //Add a follower
         public async Task<Followings> AddFollowerAsync(Followings follower)
         {

@@ -53,6 +53,16 @@ namespace BL
             return await _repo.UpdateUserAsync(user);
         }
 
+        //--------------- Promocodes CRUD ---------------
+        public async Task<PromoCode> AddPromoCodeAsync(PromoCode code)
+        {
+            return await _repo.AddPromoCodeAsync(code);
+        }
+        public async Task<int> CheckPromoCodeAsync(string code)
+        {
+            return await _repo.CheckPromoCodeAsync(code);
+        }
+
         //--------------- Following CRUD ---------------
         public async Task<Followings> AddFollowerAsync(Followings follower)
         {
