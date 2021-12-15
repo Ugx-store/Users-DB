@@ -186,7 +186,13 @@ namespace DL
                 Username = user.Username,
                 Email = user.Email,
                 Bio = user.Bio,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                ReceiveEmailConsent = user.ReceiveEmailConsent,
+                FacebookLink = user.FacebookLink,
+                TwitterLink = user.TwitterLink,
+                InstagramLink = user.InstagramLink,
+                DateTimeJoined = user.DateTimeJoined
+
             };
         }
 
