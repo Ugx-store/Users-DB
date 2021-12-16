@@ -46,7 +46,7 @@ namespace User_DB.Controllers
         }
 
         // PUT api/<ProfilePicController>/5; To update a profile pic in the DB
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] ProfilePicture updatedPic)
         {
             ProfilePicture pic = await _bl.UpdateProfilePicAsync(updatedPic);

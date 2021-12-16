@@ -46,7 +46,7 @@ namespace User_DB.Controllers
         }
 
         // PUT api/<UserReviewsController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UserReviews updatedReview)
         {
             UserReviews review = await _bl.UpdateReviewAsync(updatedReview);

@@ -105,7 +105,7 @@ namespace User_DB.Controllers
         }
 
         // PUT api/<UsersController>/5; To update a user in the DB
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] User updatedUser)
         {
             User user = await _bl.UpdateUserAsync(updatedUser);
