@@ -22,11 +22,17 @@ namespace User_DB.Controllers
         }
 
         // POST api/<EmailSender>
-
-        [HttpPost]
-        public async Task Post([FromBody] User newUser)
+        [HttpPost("{recipientEmail}/{recipientName}")]
+        public async Task Post(string recipientEmail, string recipientName)
         {
-            await _bl.SendEmailAsync(newUser.Email, newUser.Name);
+            try
+            {
+                await _bl.SendEmailAsync(recipientEmail, recipientName);
+            }
+            catch(Exception e)
+            {
+                BadRequest(e?.InnerException?.InnerException?.Message ?? e?.InnerException?.Message ?? e?.Message);
+            }
         }
     }
 }
