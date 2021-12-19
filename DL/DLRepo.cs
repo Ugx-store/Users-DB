@@ -5,15 +5,45 @@ using System.Text;
 using System.Threading.Tasks;
 using Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MimeKit;
+using MailKit.Net.Smtp;
+using System.IO;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace DL
 {
     public class DLRepo : IDLRepo
     {
         readonly private UserDBContext _context;
-        public DLRepo(UserDBContext context)
+        readonly private SmtpSettings _smtpSettings;
+
+        public DLRepo(UserDBContext context, IOptions<SmtpSettings> smtpSettings)
         {
             _context = context;
+            _smtpSettings = smtpSettings.Value;
+        }
+
+        //Send email to the users
+        public async Task SendEmailAsync(string recipientEmail, string recipientName)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(_smtpSettings.SenderName, _smtpSettings.SenderEmail));
+            message.To.Add(new MailboxAddress(recipientName, recipientEmail));
+            message.Subject = "Welcome to Refit: Let's work on your Wardrobe!";
+
+            message.Body = new TextPart("html")
+            {
+                Text = "<h3 style='color:red'>REFIT</h3>"
+            };
+
+            var client = new SmtpClient();
+
+            await client.ConnectAsync(_smtpSettings.Server, _smtpSettings.Port, true);
+            await client.AuthenticateAsync(new NetworkCredential(_smtpSettings.SenderEmail, _smtpSettings.Password));
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
         }
 
         //Add a user to the DB

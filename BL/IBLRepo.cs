@@ -19,6 +19,9 @@ namespace BL
         Task DeleteUserAsync(int id);
         Task<User> UpdateUserAsync(User user);
 
+        //Emails CRUD
+        Task SendEmailAsync(string recipientEmail, string recipientName);
+
         //Promocodes CRUD
         Task<PromoCode> AddPromoCodeAsync(PromoCode code);
         Task<int> CheckPromoCodeAsync(string code);

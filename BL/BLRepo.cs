@@ -14,6 +14,12 @@ namespace BL
             _repo = repo;
         }
 
+        //--------------- Email CRUD ---------------
+        public async Task SendEmailAsync(string recipientEmail, string recipientName)
+        {
+            await _repo.SendEmailAsync(recipientEmail, recipientName);
+        }
+
         //--------------- User CRUD ---------------
         public async Task<User> AddUserAsync(User user)
         {

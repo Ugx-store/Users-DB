@@ -19,6 +19,9 @@ namespace DL
         Task<int> CheckEmailAsync(string email);
         Task<int> CheckPhoneNumberAsync(string phoneNumber);
 
+        //Emails CRUD
+        Task SendEmailAsync(string recipientEmail, string recipientName);
+
         //Promocodes CRUD
         Task<PromoCode> AddPromoCodeAsync(PromoCode code);
         Task<int> CheckPromoCodeAsync(string code);
