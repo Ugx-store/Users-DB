@@ -35,7 +35,7 @@ namespace DL
 
             message.Body = new TextPart("html")
             {
-                Text = "<h3 style='color:red'>REFIT</h3>"
+                Text = $"<p>Welcome {recipientName}</p> <h3 style='color:red'>REFIT</h3>"
             };
 
             var client = new SmtpClient();
