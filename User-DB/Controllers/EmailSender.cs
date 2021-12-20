@@ -22,7 +22,7 @@ namespace User_DB.Controllers
         }
 
         // POST api/<EmailSender>
-        [HttpPost("{recipientEmail}/{recipientName}")]
+        [HttpGet("{recipientEmail}/{recipientName}")]
         public async Task Post(string recipientEmail, string recipientName)
         {
             try
