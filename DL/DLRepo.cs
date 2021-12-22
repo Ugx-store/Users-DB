@@ -29,7 +29,7 @@ namespace DL
         public async Task SendEmailAsync(string recipientEmail, string recipientName)
         {
             var client = new SendGridClient(_smtpSettings.ApiKey);
-            var from = new EmailAddress(_smtpSettings.SenderEmail, _smtpSettings.SenderName); 
+            var from = new EmailAddress("peterclaver.kimuli@gmail.com", "Refit"); 
             var subject = "Welcome to Refit: Let's work on your Wardrobe!";
             var to = new EmailAddress(recipientEmail, recipientName);
 

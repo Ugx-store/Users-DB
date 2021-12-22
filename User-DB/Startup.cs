@@ -42,9 +42,7 @@ namespace User_DB
 
             services.Configure<SmtpSettings>(options =>
             {
-                options.ApiKey = Configuration["SmtpSettings:ApiKey"];
-                options.SenderEmail = Configuration["SmtpSettings:SenderEmail"];
-                options.SenderName = Configuration["SmtpSettings:SenderName"];
+                options.ApiKey = Configuration.GetConnectionString("ApiKey");
             });
 
             services.AddScoped<IDLRepo, DLRepo>();
