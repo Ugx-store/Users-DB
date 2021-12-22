@@ -101,6 +101,7 @@ namespace User_DB.Controllers
         public async Task<IActionResult> Post([FromBody] User newUser)
         {
             User user = await _bl.AddUserAsync(newUser);
+            await _bl.SendEmailAsync(user.Email, user.Name);
             return Created("api/[controller]", user);
         }
 
