@@ -22,12 +22,12 @@ namespace User_DB.Controllers
         }
 
         // POST api/<EmailSender>
-        [HttpGet("{recipientEmail}/{recipientName}")]
-        public async Task Post(string recipientEmail, string recipientName)
+        [HttpPost]
+        public async Task Post([FromBody] User newUser)
         {
             try
             {
-                await _bl.SendEmailAsync(recipientEmail, recipientName);
+                await _bl.SendEmailAsync(newUser.Email, newUser.Name);
             }
             catch(Exception e)
             {
