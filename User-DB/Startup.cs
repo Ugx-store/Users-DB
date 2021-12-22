@@ -40,7 +40,14 @@ namespace User_DB
             services.AddDbContext<UserDBContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("UserDB")));
 
-            services.Configure<SmtpSettings>(Configuration.GetSection("ApplicationSettings"));
+            services.Configure<SmtpSettings>(options =>
+            {
+                options.Server = Configuration["SmtpSettings:Server"];
+                options.Port = Convert.ToInt32(Configuration["SmtpSettings:Port"]);
+                options.Password = Configuration["SmtpSettings:Password"];
+                options.SenderEmail = Configuration["SmtpSettings:SenderEmail"];
+                options.SenderName = Configuration["SmtpSettings:SenderName"];
+            });
 
             services.AddScoped<IDLRepo, DLRepo>();
             services.AddScoped<IBLRepo, BLRepo>();
