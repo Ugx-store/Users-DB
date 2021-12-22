@@ -42,9 +42,7 @@ namespace User_DB
 
             services.Configure<SmtpSettings>(options =>
             {
-                options.Server = Configuration["SmtpSettings:Server"];
-                options.Port = Convert.ToInt32(Configuration["SmtpSettings:Port"]);
-                options.Password = Configuration["SmtpSettings:Password"];
+                options.ApiKey = Configuration["SmtpSettings:ApiKey"];
                 options.SenderEmail = Configuration["SmtpSettings:SenderEmail"];
                 options.SenderName = Configuration["SmtpSettings:SenderName"];
             });
