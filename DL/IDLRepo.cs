@@ -11,9 +11,9 @@ namespace DL
     {
         //User CRUD
         Task<User> AddUserAsync(User user);
-        Task<User> GetOneUserAsync(string phone);
+        Task<User> GetOneUserAsync(string username);
         Task<List<User>> GetAllUsersAsync();
-        Task DeleteUserAsync(string phone);
+        Task DeleteUserAsync(string username);
         Task<User> UpdateUserAsync(User user);
         Task<int> CheckUserNameAsync(string username);
         Task<int> CheckEmailAsync(string email);
