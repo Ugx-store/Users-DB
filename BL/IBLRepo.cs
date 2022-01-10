@@ -11,12 +11,12 @@ namespace BL
     {
         //User CRUD
         Task<User> AddUserAsync(User user);
-        Task<User> GetOneUserAsync(int id);
+        Task<User> GetOneUserAsync(string phone);
         Task<List<User>> GetAllUsersAsync();
         Task<int> CheckUserNameAsync(string username);
         Task<int> CheckEmailAsync(string email);
         Task<int> CheckPhoneNumberAsync(string phoneNumber);
-        Task DeleteUserAsync(int id);
+        Task DeleteUserAsync(string phone);
         Task<User> UpdateUserAsync(User user);
 
         //Emails CRUD

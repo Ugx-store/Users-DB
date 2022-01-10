@@ -52,7 +52,7 @@ namespace DL
         }
 
         //Retrieve one user from the DB
-        public async Task<User> GetOneUserAsync(int id)
+        public async Task<User> GetOneUserAsync(string phone)
         {
             return await _context.Users
                 .AsNoTracking()
@@ -88,7 +88,7 @@ namespace DL
                         Note = r.Note
                     }).ToList()
                 })
-                .FirstOrDefaultAsync(u => u.Id == id);
+                .FirstOrDefaultAsync(u => u.PhoneNumber == phone);
         }
 
         public async Task<int> CheckUserNameAsync(string username)
@@ -190,9 +190,9 @@ namespace DL
         }
 
         //Delete a user 
-        public async Task DeleteUserAsync(int id)
+        public async Task DeleteUserAsync(string phone)
         {
-            _context.Users.Remove(await GetOneUserAsync(id));
+            _context.Users.Remove(await GetOneUserAsync(phone));
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }

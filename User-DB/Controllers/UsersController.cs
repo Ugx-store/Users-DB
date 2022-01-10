@@ -37,10 +37,10 @@ namespace User_DB.Controllers
         }
 
         // GET api/<UsersController>/5; To return one user by ID
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{phone}")]
+        public async Task<IActionResult> Get(string phone)
         {
-            User user = await _bl.GetOneUserAsync(id);
+            User user = await _bl.GetOneUserAsync(phone);
             if (user != null)
             {
                 return Ok(user);
@@ -53,7 +53,7 @@ namespace User_DB.Controllers
 
         // GET api/<UsersController>/user/peter; To return either 1 or 0
         [HttpGet("user/{username}")]
-        public async Task<IActionResult> Get(string username)
+        public async Task<IActionResult> GetUsername(string username)
         {
             int num = await _bl.CheckUserNameAsync(username);
             if (num == 1)
@@ -115,9 +115,9 @@ namespace User_DB.Controllers
 
         // DELETE api/<UsersController>/5; To delete a user from the DB
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task Delete(string phone)
         {
-            await _bl.DeleteUserAsync(id);
+            await _bl.DeleteUserAsync(phone);
         }
     }
 }

@@ -25,9 +25,9 @@ namespace BL
         {
             return await _repo.AddUserAsync(user);
         }
-        public async Task<User> GetOneUserAsync(int id)
+        public async Task<User> GetOneUserAsync(string phone)
         {
-            return await _repo.GetOneUserAsync(id);
+            return await _repo.GetOneUserAsync(phone);
         }
         public async Task<List<User>> GetAllUsersAsync()
         {
@@ -50,9 +50,9 @@ namespace BL
         }
 
 
-        public async Task DeleteUserAsync(int id)
+        public async Task DeleteUserAsync(string phone)
         {
-            await _repo.DeleteUserAsync(id);
+            await _repo.DeleteUserAsync(phone);
         }
         public async Task<User> UpdateUserAsync(User user)
         {
