@@ -88,7 +88,7 @@ namespace DL
                         Note = r.Note
                     }).ToList()
                 })
-                .FirstOrDefaultAsync(u => u.Username == username);
+                .FirstOrDefaultAsync(u => u.Username == username || u.Email == username);
         }
 
         public async Task<int> CheckUserNameAsync(string username)
