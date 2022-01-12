@@ -26,10 +26,10 @@ namespace User_DB.Controllers
         [HttpGet("{username}")]
         public async Task<IActionResult> Get(string username)
         {
-            List <string> names = await _bl.GetUserFollows(username);
-            if (names != null)
+            List <User> users = await _bl.GetUserFollows(username);
+            if (users != null)
             {
-                return Ok(names);
+                return Ok(users);
             }
             else
             {

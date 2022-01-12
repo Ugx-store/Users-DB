@@ -263,7 +263,7 @@ namespace DL
             return follower;
         }
 
-        public async Task<List<string>> GetUserFollows(string username)
+        public async Task<List<User>> GetUserFollows(string username)
         {
             List<Followings> followedUsers = await _context.Followings
                 .Where(f => f.FollowerName == username)
@@ -272,7 +272,7 @@ namespace DL
                     FollowedUserId = f.FollowedUserId
                 }).ToListAsync();
 
-            List<string> usernames = new List<string>();
+            List<User> users = new List<User>();
 
             foreach(Followings followedUser in followedUsers)
             {
@@ -281,13 +281,22 @@ namespace DL
                                 .Select(u => new User()
                                 {
                                     Id = u.Id,
-                                    Username = u.Username
+                                    Name = u.Name,
+                                    Username = u.Username,
+                                    Email = u.Email,
+                                    Bio = u.Bio,
+                                    PhoneNumber = u.PhoneNumber,
+                                    ReceiveEmailConsent = u.ReceiveEmailConsent,
+                                    FacebookLink = u.FacebookLink,
+                                    TwitterLink = u.TwitterLink,
+                                    InstagramLink = u.InstagramLink,
+                                    DateTimeJoined = u.DateTimeJoined
                                 })
                                 .FirstOrDefaultAsync(u => u.Id == followedUser.FollowedUserId);
-                usernames.Add(returnedUser.Username);
+                users.Add(returnedUser);
             }
 
-            return usernames;
+            return users;
         }
 
         //Get one follower for the delete method
