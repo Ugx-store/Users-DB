@@ -28,8 +28,9 @@ namespace DL
 
         //Followings CRUD
         Task<Followings> AddFollowerAsync(Followings follower);
-        Task DeleteFollowerAsync(int id);
+        Task<List<string>> GetUserFollows(string username);
         Task<Followings> GetOneFollowerAsync(int id);
+        Task DeleteFollowerAsync(int id);
 
         //User Reviews CRUD
         Task<UserReviews> AddReviewAsync(UserReviews review);

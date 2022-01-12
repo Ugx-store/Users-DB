@@ -263,6 +263,33 @@ namespace DL
             return follower;
         }
 
+        public async Task<List<string>> GetUserFollows(string username)
+        {
+            List<Followings> followedUsers = await _context.Followings
+                .Where(f => f.FollowerName == username)
+                .Select(f => new Followings()
+                {
+                    FollowedUserId = f.FollowedUserId
+                }).ToListAsync();
+
+            List<string> usernames = new List<string>();
+
+            foreach(Followings followedUser in followedUsers)
+            {
+                User returnedUser = await _context.Users
+                                .AsNoTracking()
+                                .Select(u => new User()
+                                {
+                                    Id = u.Id,
+                                    Username = u.Username
+                                })
+                                .FirstOrDefaultAsync(u => u.Id == followedUser.FollowedUserId);
+                usernames.Add(returnedUser.Username);
+            }
+
+            return usernames;
+        }
+
         //Get one follower for the delete method
         public async Task<Followings> GetOneFollowerAsync(int id)
         {

@@ -36,7 +36,7 @@ namespace User_DB.Controllers
             }
         }
 
-        // GET api/<UsersController>/5; To return one user by ID
+        // GET api/<UsersController>/username; To return one user by username
         [HttpGet("{username}")]
         public async Task<IActionResult> Get(string username)
         {

@@ -28,6 +28,7 @@ namespace BL
 
         //Following CRUD
         Task<Followings> AddFollowerAsync(Followings follower);
+        Task<List<string>> GetUserFollows(string username);
         Task DeleteFollowerAsync(int id);
         Task<Followings> GetOneFollowerAsync(int id);
 
