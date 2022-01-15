@@ -263,6 +263,7 @@ namespace DL
             return follower;
         }
 
+        //Returns all users that are followed by a certain user
         public async Task<List<User>> GetUserFollows(string username)
         {
             List<Followings> followedUsers = await _context.Followings
@@ -298,6 +299,46 @@ namespace DL
 
             return users;
         }
+
+        //Returns the profile information of all followers of a specific user
+        public async Task<List<User>> GetUserFollowersProfiles(string username)
+        {
+            User user = await _context.Users
+                .AsNoTracking()
+                .Select(u => new User()
+                {
+                    Id = u.Id,
+                    Username = u.Username,
+                    Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
+                    {
+                        Id = f.Id,
+                        FollowerUserId = f.FollowerUserId,
+                        FollowedUserId = f.FollowedUserId,
+                        FollowerName = f.FollowerName
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync(u => u.Username == username);
+
+            List<User> users = new List<User>();
+
+            foreach (Followings follower in user.Followings)
+            {
+                User userReturned = await _context.Users
+                    .Select(u => new User()
+                    {
+                        Id = u.Id,
+                        Name = u.Name,
+                        Username = u.Username,
+                        Email = u.Email
+                    })
+                    .FirstOrDefaultAsync(u => u.Username == follower.FollowerName);
+
+                users.Add(userReturned);
+            }
+
+            return users;
+        }
+
 
         //Get one follower for the delete method
         public async Task<Followings> GetOneFollowerAsync(int id)

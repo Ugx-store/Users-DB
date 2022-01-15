@@ -22,11 +22,26 @@ namespace User_DB.Controllers
             _bl = bl;
         }
 
-        // GET api/<FollowingController>/username; To return all usernames followed by a user
+        // GET api/<FollowingController>/username; To return all users followed by a user
         [HttpGet("{username}")]
         public async Task<IActionResult> Get(string username)
         {
             List <User> users = await _bl.GetUserFollows(username);
+            if (users != null)
+            {
+                return Ok(users);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        // GET api/<FollowingController>/username; To return all user profiles of a user's followers
+        [HttpGet("followers/{username}")]
+        public async Task<IActionResult> GetUserFollowers(string username)
+        {
+            List<User> users = await _bl.GetUserFollowersProfiles(username);
             if (users != null)
             {
                 return Ok(users);

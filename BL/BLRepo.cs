@@ -80,6 +80,11 @@ namespace BL
             return await _repo.GetUserFollows(username);
         }
 
+        public async Task<List<User>> GetUserFollowersProfiles(string username)
+        {
+            return await _repo.GetUserFollowersProfiles(username);
+        }
+
         public async Task<Followings> GetOneFollowerAsync(int id)
         {
             return await _repo.GetOneFollowerAsync(id);
