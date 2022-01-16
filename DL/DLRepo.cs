@@ -329,7 +329,14 @@ namespace DL
                         Id = u.Id,
                         Name = u.Name,
                         Username = u.Username,
-                        Email = u.Email
+                        Email = u.Email,
+                        Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
+                        {
+                            Id = f.Id,
+                            FollowerUserId = f.FollowerUserId,
+                            FollowedUserId = f.FollowedUserId,
+                            FollowerName = f.FollowerName
+                        }).ToList()
                     })
                     .FirstOrDefaultAsync(u => u.Username == follower.FollowerName);
 
