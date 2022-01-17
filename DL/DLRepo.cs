@@ -291,7 +291,14 @@ namespace DL
                                     FacebookLink = u.FacebookLink,
                                     TwitterLink = u.TwitterLink,
                                     InstagramLink = u.InstagramLink,
-                                    DateTimeJoined = u.DateTimeJoined
+                                    DateTimeJoined = u.DateTimeJoined,
+                                    Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
+                                    {
+                                        Id = f.Id,
+                                        FollowerUserId = f.FollowerUserId,
+                                        FollowedUserId = f.FollowedUserId,
+                                        FollowerName = f.FollowerName
+                                    }).ToList()
                                 })
                                 .FirstOrDefaultAsync(u => u.Id == followedUser.FollowedUserId);
                 users.Add(returnedUser);
