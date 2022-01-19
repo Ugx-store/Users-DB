@@ -118,13 +118,13 @@ namespace BL
         {
             return await _repo.AddProfilePicAsync(pic);
         }
-        public async Task<ProfilePicture> GetProfilePicAsync(int id)
+        public async Task<ProfilePicture> GetProfilePicAsync(string username)
         {
-            return await _repo.GetProfilePicAsync(id);
+            return await _repo.GetProfilePicAsync(username);
         }
-        public async Task DeleteProfilePicAsync(int id)
+        public async Task DeleteProfilePicAsync(string username)
         {
-            await _repo.DeleteProfilePicAsync(id);
+            await _repo.DeleteProfilePicAsync(username);
         }
         public async Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic)
         {

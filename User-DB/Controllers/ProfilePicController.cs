@@ -23,10 +23,10 @@ namespace User_DB.Controllers
         }
 
         // GET api/<ProfilePicController>/5; To return one Profile by ID
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{username}")]
+        public async Task<IActionResult> Get(string username)
         {
-            ProfilePicture pic = await _bl.GetProfilePicAsync(id);
+            ProfilePicture pic = await _bl.GetProfilePicAsync(username);
             if (pic != null)
             {
                 return Ok(pic);
@@ -55,9 +55,9 @@ namespace User_DB.Controllers
 
         // DELETE api/<ProfilePicController>/5; To delete a picture from the DB
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task Delete(string username)
         {
-            await _bl.DeleteProfilePicAsync(id);
+            await _bl.DeleteProfilePicAsync(username);
         }
     }
 }

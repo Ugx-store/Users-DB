@@ -41,8 +41,8 @@ namespace BL
 
         //ProfilePicture CRUD
         Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic);
-        Task<ProfilePicture> GetProfilePicAsync(int id);
-        Task DeleteProfilePicAsync(int id);
+        Task<ProfilePicture> GetProfilePicAsync(string username);
+        Task DeleteProfilePicAsync(string username);
         Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic);
     }
 }

@@ -433,7 +433,7 @@ namespace DL
 
             return pic;
         }
-        public async Task<ProfilePicture> GetProfilePicAsync(int id)
+        public async Task<ProfilePicture> GetProfilePicAsync(string username)
         {
             return await _context.ProfilePictures
                 .AsNoTracking()
@@ -443,11 +443,11 @@ namespace DL
                     UserId = p.UserId,
                     ImageData = p.ImageData
                 })
-                .FirstOrDefaultAsync(p => p.UserId == id);
+                .FirstOrDefaultAsync(p => p.Username == username);
         }
-        public async Task DeleteProfilePicAsync(int id)
+        public async Task DeleteProfilePicAsync(string username)
         {
-            _context.ProfilePictures.Remove(await GetProfilePicAsync(id));
+            _context.ProfilePictures.Remove(await GetProfilePicAsync(username));
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }
