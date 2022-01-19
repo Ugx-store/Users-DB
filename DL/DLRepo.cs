@@ -427,6 +427,13 @@ namespace DL
         //ProfilePicture CRUD
         public async Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic)
         {
+
+            ProfilePicture image = await GetProfilePicAsync(pic.Username);
+            if (image != null)
+            {
+                await DeleteProfilePicAsync(pic.Username);
+            }
+
             await _context.AddAsync(pic);
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
