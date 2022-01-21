@@ -438,7 +438,7 @@ namespace DL
 
             using (var memoryStream = new MemoryStream())
             {
-                pic.ImageData.CopyTo(memoryStream);
+                pic.ImageData[0].CopyTo(memoryStream);
 
                 picToUpload.UserId = pic.UserId;
                 picToUpload.Username = pic.Username;
