@@ -425,20 +425,27 @@ namespace DL
         }
 
         //ProfilePicture CRUD
-        public async Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic)
+        public async Task<ProfilePicture> AddProfilePicAsync(ImageModel pic)
         {
 
             ProfilePicture image = await GetProfilePicAsync(pic.Username);
             if (image != null)
             {
-                await DeleteProfilePicAsync(pic.Username);
+                await DeleteProfilePicAsync(image.Username);
             }
 
-            await _context.AddAsync(pic);
+            FileStream fs = pic.ImageData.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+            ProfilePicture picToUpload = new ProfilePicture();
+            picToUpload.UserId = pic.UserId;
+            picToUpload.Username = pic.Username;
+            picToUpload.ImageData = new byte[fs.Length];
+
+            await _context.AddAsync(picToUpload);
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
 
-            return pic;
+            return picToUpload;
         }
         public async Task<ProfilePicture> GetProfilePicAsync(string username)
         {

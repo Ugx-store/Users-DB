@@ -114,7 +114,7 @@ namespace BL
         }
 
         //--------------- Profile Picture CRUD ---------------
-        public async Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic)
+        public async Task<ProfilePicture> AddProfilePicAsync(ImageModel pic)
         {
             return await _repo.AddProfilePicAsync(pic);
         }

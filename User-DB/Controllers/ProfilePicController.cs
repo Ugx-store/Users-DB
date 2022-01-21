@@ -39,7 +39,7 @@ namespace User_DB.Controllers
 
         // POST api/<ProfilePicController>; To add a new profile pic in the DB
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ProfilePicture newPic)
+        public async Task<IActionResult> Post([FromBody] ImageModel newPic)
         {
             ProfilePicture pic = await _bl.AddProfilePicAsync(newPic);
             return Created("api/[controller]", pic);

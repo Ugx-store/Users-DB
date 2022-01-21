@@ -40,7 +40,7 @@ namespace BL
         Task<UserReviews> UpdateReviewAsync(UserReviews review);
 
         //ProfilePicture CRUD
-        Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic);
+        Task<ProfilePicture> AddProfilePicAsync(ImageModel pic);
         Task<ProfilePicture> GetProfilePicAsync(string username);
         Task DeleteProfilePicAsync(string username);
         Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic);
