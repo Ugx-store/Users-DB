@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Models
     {
         public int UserId { get; set; }
         public string Username { get; set; }
-        public FileInfo ImageData { get; set; }
+        public IFormFile ImageData { get; set; }
 
         
     }

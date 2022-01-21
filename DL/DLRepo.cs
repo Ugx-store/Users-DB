@@ -434,12 +434,17 @@ namespace DL
                 await DeleteProfilePicAsync(image.Username);
             }
 
-            FileStream fs = pic.ImageData.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
-
             ProfilePicture picToUpload = new ProfilePicture();
-            picToUpload.UserId = pic.UserId;
-            picToUpload.Username = pic.Username;
-            picToUpload.ImageData = new byte[fs.Length];
+
+            using (var memoryStream = new MemoryStream())
+            {
+                pic.ImageData.CopyTo(memoryStream);
+
+                picToUpload.UserId = pic.UserId;
+                picToUpload.Username = pic.Username;
+                picToUpload.ImageData = memoryStream.ToArray();
+
+            }
 
             await _context.AddAsync(picToUpload);
             await _context.SaveChangesAsync();
