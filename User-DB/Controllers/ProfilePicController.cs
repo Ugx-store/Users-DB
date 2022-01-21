@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BL;
 using Models;
+using System.IO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,11 +39,24 @@ namespace User_DB.Controllers
         }
 
         // POST api/<ProfilePicController>; To add a new profile pic in the DB
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ImageModel newPic)
+        [HttpPost("{username}")]
+        public async Task<IActionResult> Post(string username)
         {
-            ProfilePicture pic = await _bl.AddProfilePicAsync(newPic);
-            return Created("api/[controller]", pic);
+            var file = Request.Form.Files[0];
+            byte[] image;
+
+            if(file.Length > 0)
+            {
+                using(var memoryStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(memoryStream);
+                    image = memoryStream.ToArray();
+
+                    ProfilePicture pic = await _bl.AddProfilePicAsync(username, image);
+                }
+            }
+            
+            return Created("api/[controller]", username);
         }
 
         // PUT api/<ProfilePicController>/5; To update a profile pic in the DB

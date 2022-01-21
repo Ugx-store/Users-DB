@@ -12,7 +12,7 @@ namespace Models
     {
         public int UserId { get; set; }
         public string Username { get; set; }
-        public IFormFile[] ImageData { get; set; }
+        public Object ImageData { get; set; }
 
         
     }

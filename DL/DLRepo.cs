@@ -425,29 +425,23 @@ namespace DL
         }
 
         //ProfilePicture CRUD
-        public async Task<ProfilePicture> AddProfilePicAsync(ImageModel pic)
+        public async Task<ProfilePicture> AddProfilePicAsync(string username, byte[] file)
         {
 
-            ProfilePicture image = await GetProfilePicAsync(pic.Username);
+            ProfilePicture image = await GetProfilePicAsync(username);
             if (image != null)
             {
-                await DeleteProfilePicAsync(image.Username);
+                await DeleteProfilePicAsync(username);
             }
 
             ProfilePicture picToUpload = new ProfilePicture();
 
-            using (var memoryStream = new MemoryStream())
-            {
-                pic.ImageData[0].CopyTo(memoryStream);
+            picToUpload.Username = username;
+            picToUpload.ImageData = file;
 
-                picToUpload.UserId = pic.UserId;
-                picToUpload.Username = pic.Username;
-                picToUpload.ImageData = memoryStream.ToArray();
-
-                await _context.AddAsync(picToUpload);
-                await _context.SaveChangesAsync();
-                _context.ChangeTracker.Clear();
-            }
+            await _context.AddAsync(picToUpload);
+            await _context.SaveChangesAsync();
+            _context.ChangeTracker.Clear();
 
             return picToUpload;
         }
@@ -458,7 +452,7 @@ namespace DL
                 .Select(p => new ProfilePicture()
                 {
                     Id = p.Id,
-                    UserId = p.UserId,
+                    Username = p.Username,
                     ImageData = p.ImageData
                 })
                 .FirstOrDefaultAsync(p => p.Username == username);
@@ -478,7 +472,7 @@ namespace DL
             return new ProfilePicture()
             {
                 Id = pic.Id,
-                UserId = pic.UserId,
+                Username = pic.Username,
                 ImageData = pic.ImageData
             };
         }
