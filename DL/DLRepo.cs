@@ -444,11 +444,10 @@ namespace DL
                 picToUpload.Username = pic.Username;
                 picToUpload.ImageData = memoryStream.ToArray();
 
+                await _context.AddAsync(picToUpload);
+                await _context.SaveChangesAsync();
+                _context.ChangeTracker.Clear();
             }
-
-            await _context.AddAsync(picToUpload);
-            await _context.SaveChangesAsync();
-            _context.ChangeTracker.Clear();
 
             return picToUpload;
         }
