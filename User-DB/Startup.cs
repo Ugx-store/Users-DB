@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace User_DB
 {
@@ -39,6 +40,13 @@ namespace User_DB
 
             services.AddDbContext<UserDBContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("UserDB")));
+
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
 
             services.Configure<SmtpSettings>(options =>
             {

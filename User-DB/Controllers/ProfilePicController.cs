@@ -39,10 +39,11 @@ namespace User_DB.Controllers
         }
 
         // POST api/<ProfilePicController>; To add a new profile pic in the DB
-        [HttpPost("{username}")]
+        [HttpPost("{username}"), DisableRequestSizeLimit]
         public async Task<IActionResult> Post(string username)
         {
-            var file = Request.Form.Files[0];
+            var formCollection = await Request.ReadFormAsync();
+            var file = formCollection.Files.First();
             byte[] image;
 
             if(file.Length > 0)
