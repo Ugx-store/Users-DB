@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BL;
 using Models;
 using System.IO;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,7 +22,7 @@ namespace User_DB.Controllers
             _bl = bl;
         }
 
-        // GET api/<ProfilePicController>/5; To return one Profile by ID
+        // GET api/<ProfilePicController>/johndoe; To return one Profile picture by username
         [HttpGet("{username}")]
         public async Task<IActionResult> Get(string username)
         {
@@ -29,6 +30,21 @@ namespace User_DB.Controllers
             if (pic != null)
             {
                 return Ok(pic.ImageData);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        // GET api/<ProfilePicController>/johndoe; To return a list of Profile pictures by username
+        [HttpGet("pictures/{username}")]
+        public async Task<IActionResult> GetProfilePictures(string username)
+        {
+            List<ProfilePicture> pics = await _bl.GetProfilePicturesAsync(username);
+            if (pics != null)
+            {
+                return Ok(pics);
             }
             else
             {

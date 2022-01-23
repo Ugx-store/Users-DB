@@ -42,6 +42,7 @@ namespace DL
         //ProfilePicture CRUD
         Task<ProfilePicture> AddProfilePicAsync(string username, byte[] file);
         Task<ProfilePicture> GetProfilePicAsync(string username);
+        Task<List<ProfilePicture>> GetProfilePicturesAsync(string username);
         Task DeleteProfilePicAsync(string username);
         Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic);
     }

@@ -424,7 +424,8 @@ namespace DL
             };
         }
 
-        //ProfilePicture CRUD
+        //------------------ ProfilePicture CRUD --------------------
+        //Add a profile picture
         public async Task<ProfilePicture> AddProfilePicAsync(string username, byte[] file)
         {
 
@@ -445,6 +446,8 @@ namespace DL
 
             return picToUpload;
         }
+
+        //Get one profile picture for a given username
         public async Task<ProfilePicture> GetProfilePicAsync(string username)
         {
             return await _context.ProfilePictures
@@ -457,12 +460,52 @@ namespace DL
                 })
                 .FirstOrDefaultAsync(p => p.Username == username);
         }
+
+        //Get profile pictures for followers of a given username
+        public async Task<List<ProfilePicture>> GetProfilePicturesAsync(string username)
+        {
+            User user = await _context.Users
+                .AsNoTracking()
+                .Select(u => new User()
+                {
+                    Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
+                    {
+                        Id = f.Id,
+                        FollowerUserId = f.FollowerUserId,
+                        FollowedUserId = f.FollowedUserId,
+                        FollowerName = f.FollowerName
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync(u => u.Username == username);
+
+            List<ProfilePicture> pictures = new List<ProfilePicture>();
+
+            foreach(Followings follower in user.Followings)
+            {
+                ProfilePicture pic = await _context.ProfilePictures
+                                .AsNoTracking()
+                                .Select(p => new ProfilePicture()
+                                {
+                                    Id = p.Id,
+                                    Username = p.Username,
+                                    ImageData = p.ImageData
+                                })
+                                .FirstOrDefaultAsync(p => p.Username == follower.FollowerName);
+                pictures.Add(pic);
+            }
+
+            return pictures;
+        }
+
+        //Delete a specific profile pic
         public async Task DeleteProfilePicAsync(string username)
         {
             _context.ProfilePictures.Remove(await GetProfilePicAsync(username));
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
         }
+        
+        //Update a user's profile picture
         public async Task<ProfilePicture> UpdateProfilePicAsync(ProfilePicture pic)
         {
             _context.ProfilePictures.Update(pic);

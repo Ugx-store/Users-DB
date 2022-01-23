@@ -122,6 +122,12 @@ namespace BL
         {
             return await _repo.GetProfilePicAsync(username);
         }
+
+        public async Task<List<ProfilePicture>> GetProfilePicturesAsync(string username)
+        {
+            return await _repo.GetProfilePicturesAsync(username);
+        }
+
         public async Task DeleteProfilePicAsync(string username)
         {
             await _repo.DeleteProfilePicAsync(username);
