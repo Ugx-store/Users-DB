@@ -30,7 +30,7 @@ namespace User_DB.Controllers
             ProfilePicture pic = await _bl.GetProfilePicAsync(username);
             if (pic != null)
             {
-                return Ok(pic);
+                return Ok(pic.ImageData);
             }
             else
             {
