@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BL;
@@ -39,7 +37,7 @@ namespace User_DB.Controllers
         }
 
         // POST api/<ProfilePicController>; To add a new profile pic in the DB
-        [HttpPost("{username}"), DisableRequestSizeLimit]
+        [HttpPost("{username}")]
         public async Task<IActionResult> Post(string username)
         {
             var formCollection = await Request.ReadFormAsync();
