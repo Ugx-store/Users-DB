@@ -468,6 +468,8 @@ namespace DL
                 .AsNoTracking()
                 .Select(u => new User()
                 {
+                    Id = u.Id,
+                    Username = u.Username,
                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                     {
                         Id = f.Id,
