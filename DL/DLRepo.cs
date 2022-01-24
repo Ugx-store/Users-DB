@@ -71,6 +71,12 @@ namespace DL
                     TwitterLink = u.TwitterLink,
                     InstagramLink = u.InstagramLink,
                     DateTimeJoined = u.DateTimeJoined,
+                    ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
+                    {
+                        Id = p.Id,
+                        Username = p.Username,
+                        ImageData = p.ImageData
+                    }).FirstOrDefault(p => p.Username == u.Username),
                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                     {
                         Id = f.Id,
@@ -170,6 +176,12 @@ namespace DL
                     TwitterLink = u.TwitterLink,
                     InstagramLink = u.InstagramLink,
                     DateTimeJoined = u.DateTimeJoined,
+                    ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
+                    {
+                        Id = p.Id,
+                        Username = p.Username,
+                        ImageData = p.ImageData
+                    }).FirstOrDefault(p => p.Username == u.Username),
                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                     {
                         Id = f.Id,
@@ -292,6 +304,12 @@ namespace DL
                                     TwitterLink = u.TwitterLink,
                                     InstagramLink = u.InstagramLink,
                                     DateTimeJoined = u.DateTimeJoined,
+                                    ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
+                                    {
+                                        Id = p.Id,
+                                        Username = p.Username,
+                                        ImageData = p.ImageData
+                                    }).FirstOrDefault(p => p.Username == u.Username),
                                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                                     {
                                         Id = f.Id,
@@ -337,6 +355,12 @@ namespace DL
                         Name = u.Name,
                         Username = u.Username,
                         Email = u.Email,
+                        ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
+                        {
+                            Id = p.Id,
+                            Username = p.Username,
+                            ImageData = p.ImageData
+                        }).FirstOrDefault(p => p.Username == u.Username),
                         Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                         {
                             Id = f.Id,
