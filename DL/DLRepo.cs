@@ -450,25 +450,20 @@ namespace DL
 
         //------------------ ProfilePicture CRUD --------------------
         //Add a profile picture
-        public async Task<ProfilePicture> AddProfilePicAsync(string username, byte[] file)
+        public async Task<ProfilePicture> AddProfilePicAsync(ProfilePicture pic)
         {
 
-            ProfilePicture image = await GetProfilePicAsync(username);
+            ProfilePicture image = await GetProfilePicAsync(pic.Username);
             if (image != null)
             {
-                await DeleteProfilePicAsync(username);
+                await DeleteProfilePicAsync(pic.Username);
             }
 
-            ProfilePicture picToUpload = new ProfilePicture();
-
-            picToUpload.Username = username;
-            picToUpload.ImageData = file;
-
-            await _context.AddAsync(picToUpload);
+            await _context.AddAsync(pic);
             await _context.SaveChangesAsync();
             _context.ChangeTracker.Clear();
 
-            return picToUpload;
+            return pic;
         }
 
         //Get one profile picture for a given username

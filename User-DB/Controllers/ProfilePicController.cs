@@ -53,25 +53,27 @@ namespace User_DB.Controllers
         }
 
         // POST api/<ProfilePicController>; To add a new profile pic in the DB
-        [HttpPost("{username}")]
-        public async Task<IActionResult> Post(string username)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] ProfilePicture pic)
         {
-            var formCollection = await Request.ReadFormAsync();
+            /*var formCollection = await Request.ReadFormAsync();
             var file = formCollection.Files.First();
             byte[] image;
 
-            if(file.Length > 0)
+            if (file.Length > 0)
             {
-                using(var memoryStream = new MemoryStream())
+                using (var memoryStream = new MemoryStream())
                 {
                     await file.CopyToAsync(memoryStream);
                     image = memoryStream.ToArray();
 
                     ProfilePicture pic = await _bl.AddProfilePicAsync(username, image);
                 }
-            }
-            
-            return Created("api/[controller]", username);
+            }*/
+
+            ProfilePicture newPic = await _bl.AddProfilePicAsync(pic);
+
+            return Created("api/[controller]", pic.Username);
         }
 
         // PUT api/<ProfilePicController>/5; To update a profile pic in the DB
