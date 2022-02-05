@@ -456,12 +456,14 @@ namespace DL
             ProfilePicture image = await GetProfilePicAsync(pic.Username);
             if (image != null)
             {
-                await DeleteProfilePicAsync(pic.Username);
+                await UpdateProfilePicAsync(pic);
             }
-
-            await _context.AddAsync(pic);
-            await _context.SaveChangesAsync();
-            _context.ChangeTracker.Clear();
+            else
+            {
+                await _context.AddAsync(pic);
+                await _context.SaveChangesAsync();
+                _context.ChangeTracker.Clear();
+            }
 
             return pic;
         }
