@@ -73,7 +73,15 @@ namespace User_DB.Controllers
 
             ProfilePicture newPic = await _bl.AddProfilePicAsync(pic);
 
-            return Created("api/[controller]", pic.Username);
+            if(newPic != null)
+            {
+                return Created("api/[controller]", pic.Id);
+            }
+            else
+            {
+                return Created("api/[controller]", "failure");
+            }
+            
         }
 
         // PUT api/<ProfilePicController>/5; To update a profile pic in the DB
@@ -85,7 +93,7 @@ namespace User_DB.Controllers
         }
 
         // DELETE api/<ProfilePicController>/5; To delete a picture from the DB
-        [HttpDelete("{id}")]
+        [HttpDelete("{username}")]
         public async Task Delete(string username)
         {
             await _bl.DeleteProfilePicAsync(username);

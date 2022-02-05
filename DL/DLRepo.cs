@@ -456,6 +456,7 @@ namespace DL
             ProfilePicture image = await GetProfilePicAsync(pic.Username);
             if (image != null)
             {
+                pic.Id = image.Id;
                 await UpdateProfilePicAsync(pic);
             }
             else
