@@ -3,15 +3,17 @@ using System;
 using DL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DL.Migrations
 {
     [DbContext(typeof(UserDBContext))]
-    partial class UserDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220206023431_UserDBMigration28")]
+    partial class UserDBMigration28
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,8 +64,6 @@ namespace DL.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("ProfilePictures");
                 });
@@ -170,15 +170,6 @@ namespace DL.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Models.ProfilePicture", b =>
-                {
-                    b.HasOne("Models.User", null)
-                        .WithMany("ProfilePicture")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Models.UserReviews", b =>
                 {
                     b.HasOne("Models.User", null)
@@ -189,8 +180,6 @@ namespace DL.Migrations
             modelBuilder.Entity("Models.User", b =>
                 {
                     b.Navigation("Followings");
-
-                    b.Navigation("ProfilePicture");
 
                     b.Navigation("Reviews");
                 });

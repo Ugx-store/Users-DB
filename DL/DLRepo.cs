@@ -58,6 +58,7 @@ namespace DL
                 .AsNoTracking()
                 .Include(f => f.Followings)
                 .Include(r => r.Reviews)
+                .Include(p => p.ProfilePicture)
                 .Select(u => new User()
                 {
                     Id = u.Id,
@@ -71,12 +72,13 @@ namespace DL
                     TwitterLink = u.TwitterLink,
                     InstagramLink = u.InstagramLink,
                     DateTimeJoined = u.DateTimeJoined,
-                    ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
+                    ProfilePicture = _context.ProfilePictures.Where(p => p.Username == u.Username).Select(p => new ProfilePicture()
                     {
                         Id = p.Id,
+                        UserId = p.UserId,
                         Username = p.Username,
                         ImageData = p.ImageData
-                    }).FirstOrDefault(p => p.Username == u.Username),
+                    }).ToList(),
                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                     {
                         Id = f.Id,
@@ -163,6 +165,7 @@ namespace DL
             return await _context.Users
                 .Include(f => f.Followings)
                 .Include(r => r.Reviews)
+                .Include(p => p.ProfilePicture)
                 .Select(u => new User()
                 {
                     Id = u.Id,
@@ -176,12 +179,13 @@ namespace DL
                     TwitterLink = u.TwitterLink,
                     InstagramLink = u.InstagramLink,
                     DateTimeJoined = u.DateTimeJoined,
-                    ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
+                    ProfilePicture = _context.ProfilePictures.Where(p => p.Username == u.Username).Select(p => new ProfilePicture()
                     {
                         Id = p.Id,
+                        UserId = p.UserId,
                         Username = p.Username,
                         ImageData = p.ImageData
-                    }).FirstOrDefault(p => p.Username == u.Username),
+                    }).ToList(),
                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                     {
                         Id = f.Id,
@@ -291,6 +295,7 @@ namespace DL
             {
                 User returnedUser = await _context.Users
                                 .AsNoTracking()
+                                .Include(p => p.ProfilePicture)
                                 .Select(u => new User()
                                 {
                                     Id = u.Id,
@@ -304,12 +309,13 @@ namespace DL
                                     TwitterLink = u.TwitterLink,
                                     InstagramLink = u.InstagramLink,
                                     DateTimeJoined = u.DateTimeJoined,
-                                    ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
+                                    ProfilePicture = _context.ProfilePictures.Where(p => p.Username == u.Username).Select(p => new ProfilePicture()
                                     {
                                         Id = p.Id,
+                                        UserId = p.UserId,
                                         Username = p.Username,
                                         ImageData = p.ImageData
-                                    }).FirstOrDefault(p => p.Username == u.Username),
+                                    }).ToList(),
                                     Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                                     {
                                         Id = f.Id,
@@ -349,18 +355,20 @@ namespace DL
             foreach (Followings follower in user.Followings)
             {
                 User userReturned = await _context.Users
+                    .Include(p => p.ProfilePicture)
                     .Select(u => new User()
                     {
                         Id = u.Id,
                         Name = u.Name,
                         Username = u.Username,
                         Email = u.Email,
-                        ProfilePicture = _context.ProfilePictures.Select(p => new ProfilePicture()
-                        {
+                        ProfilePicture = _context.ProfilePictures.Where(p => p.Username == u.Username).Select(p => new ProfilePicture()
+                        { 
                             Id = p.Id,
+                            UserId = p.UserId,
                             Username = p.Username,
                             ImageData = p.ImageData
-                        }).FirstOrDefault(p => p.Username == u.Username),
+                        }).ToList(),
                         Followings = _context.Followings.Where(f => f.FollowedUserId == u.Id).Select(f => new Followings()
                         {
                             Id = f.Id,

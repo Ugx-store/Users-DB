@@ -17,9 +17,9 @@ namespace Models
         public string TwitterLink { get; set; }
         public string InstagramLink { get; set; }
         public string PromoCode { get; set; }
-        public ProfilePicture ProfilePicture { get; set; }
         public DateTime DateTimeJoined { set; get; }
         public List<Followings> Followings { set; get; }
         public List<UserReviews> Reviews { set; get; }
+        public List<ProfilePicture> ProfilePicture { set; get; }
     }
 }
