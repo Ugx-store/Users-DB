@@ -67,6 +67,7 @@ namespace DL
                     Email = u.Email,
                     Bio = u.Bio,
                     PhoneNumber = u.PhoneNumber,
+                    ProfileVisits = u.ProfileVisits,
                     ReceiveEmailConsent = u.ReceiveEmailConsent,
                     FacebookLink = u.FacebookLink,
                     TwitterLink = u.TwitterLink,
@@ -174,6 +175,7 @@ namespace DL
                     Email = u.Email,
                     Bio = u.Bio,
                     PhoneNumber = u.PhoneNumber,
+                    ProfileVisits = u.ProfileVisits,
                     ReceiveEmailConsent = u.ReceiveEmailConsent,
                     FacebookLink = u.FacebookLink,
                     TwitterLink = u.TwitterLink,
@@ -228,12 +230,12 @@ namespace DL
                 Email = user.Email,
                 Bio = user.Bio,
                 PhoneNumber = user.PhoneNumber,
+                ProfileVisits = user.ProfileVisits,
                 ReceiveEmailConsent = user.ReceiveEmailConsent,
                 FacebookLink = user.FacebookLink,
                 TwitterLink = user.TwitterLink,
                 InstagramLink = user.InstagramLink,
                 DateTimeJoined = user.DateTimeJoined
-
             };
         }
 
@@ -304,6 +306,7 @@ namespace DL
                                     Email = u.Email,
                                     Bio = u.Bio,
                                     PhoneNumber = u.PhoneNumber,
+                                    ProfileVisits = u.ProfileVisits,
                                     ReceiveEmailConsent = u.ReceiveEmailConsent,
                                     FacebookLink = u.FacebookLink,
                                     TwitterLink = u.TwitterLink,
